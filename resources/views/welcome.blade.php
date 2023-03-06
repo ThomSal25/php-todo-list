@@ -16,11 +16,12 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        <div >
+        <!-- class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white" -->
            <h1>First App with Laravel, Todo App</h1><br>
            <h2>(All time favorite) ;)</h2><br>
 
-           <form method="post" action="{{ route('saveItem')}}">
+           <form method="post" action="{{ route('saveItem')}}" accept-charset="UTF-8">
             {{csrf_field()}}
                 <label for="listEntry">New Todo Item</label>
                 <input type="text" name="listEntry" id=""><br>
@@ -28,6 +29,18 @@
                 <button>Save Item</button>
            </form>
            
+           <div style="margin-top: 20px;">
+            @foreach ($listEntries as $listEntry)
+                <div class="flex" style="align-items: space-between;">
+                    <p>Item: {{ $listEntry->name }}</p>
+                    <form method="post" action="{{ route('markComplete', $listEntry->id)}}" accept-charset="UTF-8">
+                    {{csrf_field()}}
+                        <button type="submit" style="margin-left: 20px;">   Complete</button>
+                    </form>
+                </div>    
+            @endforeach
+           </div>
+
         </div>
     </body>
 </html>
