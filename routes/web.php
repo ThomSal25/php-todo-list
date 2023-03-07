@@ -18,6 +18,8 @@ Route::get('/', [TodoListController::class, 'index']);
 
 Route::post('/saveItemRoute', [TodoListController::class, 'saveItem'])->name('saveItem');
 Route::post('/markCompleteRoute/{id}', [TodoListController::class, 'markComplete'])->name('markComplete');
+Route::post('/toggleCompleteRoute/{id}', [TodoListController::class, 'toggleComplete'])->name('toggleComplete');
+Route::post('/deleteEntryRoute/{id}', [TodoListController::class, 'deleteEntry'])->name('deleteEntry');
 
 Route::get('/dbconn', function(){
     return view('dbconn');

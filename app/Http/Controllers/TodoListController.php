@@ -10,17 +10,18 @@ class TodoListController extends Controller
     //
     public function index(){
         // show all ListEntries
-        // return view('welcome', ['listEntries' => listEntry::all()]);
+        return view('welcome', ['listEntries' => listEntry::all()]);
         // show all, which are not complete
-        return view('welcome', ['listEntries' => listEntry::where('is_complete', 0)->get()]);
+        // return view('welcome', ['listEntries' => listEntry::where('is_complete', 0)->get()]);
     }
 
     public function saveItem(Request $request){
-        // \Log::info(json_encode($request->all()));
+        \Log::info(json_encode($request->all()));
         // neues Listen-Element erstellen
         $newListEntry = New listEntry;
         $newListEntry->name= $request->listEntry;
         $newListEntry->is_complete = 0;
+        $newListEntry->isDone= false;
         $newListEntry->save();
         return redirect('/');
     }
@@ -29,9 +30,28 @@ class TodoListController extends Controller
         // \Log::info($id);
         // ListElement updaten
         $ListEntry = listEntry::find($id);
-        // \Log::info($ListEntry);
-        $ListEntry->is_complete = 1;
+        \Log::info($ListEntry);
+        if($ListEntry->is_complete == 0){
+            $ListEntry->is_complete = 1;
+        } else{
+            $ListEntry->is_complete = 0;
+        }
         $ListEntry->save();
+        return redirect('/');
+    }
+
+    // public function toggleComplete($id){
+    //     $ListEntry = listEntry::find($id);
+    //     $ListEntry->isDone = !$ListEntry->isDone;
+    //     $ListEntry->save();
+    //     \Log::info($ListEntry);
+    //     return redirect('/');
+    // }
+
+    public function deleteEntry($id){
+        $ListEntry = listEntry::find($id);
+        \Log::info($ListEntry);
+        $ListEntry->delete();
         return redirect('/');
     }
 }
