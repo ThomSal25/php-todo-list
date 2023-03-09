@@ -12,7 +12,19 @@ class TodoListController extends Controller
         // show all ListEntries
         return view('welcome', ['listEntries' => listEntry::all()]);
         // show all, which are not complete
-        // return view('welcome', ['listEntries' => listEntry::where('is_complete', 0)->get()]);
+        // return view('welcome', ['listEntries' => listEntry::where('is_complete', 1)->get()]);
+    }
+
+    public function showAll(){
+        return view('welcome', ['listEntries' => listEntry::all()]);
+    }
+    
+    public function showOpen(){
+        return view('welcome', ['listEntries' => listEntry::where('is_complete', 0)->get()]);
+    }
+
+    public function showDone(){
+        return view('welcome', ['listEntries' => listEntry::where('is_complete', 1)->get()]);
     }
 
     public function saveItem(Request $request){

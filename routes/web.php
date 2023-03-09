@@ -15,6 +15,9 @@ use App\Http\Controllers\TodoListController;
 */
 
 Route::get('/', [TodoListController::class, 'index']);
+Route::get('/showAllRoute', [TodoListController::class, 'showAll'])->name('showAll');
+Route::get('/showOpenRoute', [TodoListController::class, 'showOpen'])->name('showOpen');
+Route::get('/showDoneRoute', [TodoListController::class, 'showDone'])->name('showDone');
 
 Route::post('/saveItemRoute', [TodoListController::class, 'saveItem'])->name('saveItem');
 Route::post('/markCompleteRoute/{id}', [TodoListController::class, 'markComplete'])->name('markComplete');

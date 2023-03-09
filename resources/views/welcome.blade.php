@@ -724,8 +724,12 @@
            }
 
         </style>
+        
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'vendor/courier/build'])
+
     </head>
     <body class="antialiased">
+        <div id="app"></div>
         <div class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         <!--  sm:flex sm:justify-center sm:items-center   " -->
            <h1>First App with Laravel, Todo App</h1>
@@ -741,17 +745,16 @@
            </form>
 
            <!-- Filter -->
-           <form method="get" >
-           {{csrf_field()}}
-                <input type="radio" id="all-todos" name="todo" checked>
+           
+                <input   type="radio" id="all-todos" name="todo" checked >
                 <label for="all-todos">all todos</label>
-
-                <input type="radio" id="open-todos" name="todo">
+            
+                <input   type="radio" id="open-todos" name="todo">
                 <label for="open-todos">open todos</label>
-
-                <input type="radio" id="done-todos" name="todo">
+            
+                <input   type="radio" id="done-todos" name="todo">
                 <label for="done-todos">done todos</label>
-            </form>
+            
            
            <!-- Todo List -->
            <ul style="margin-top: 20px;">
