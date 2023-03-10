@@ -15,6 +15,7 @@ use App\Http\Controllers\TodoListController;
 */
 
 Route::get('/', [TodoListController::class, 'index']);
+Route::get('/user', [TodoListController::class, 'userView']);
 Route::get('/showAllRoute', [TodoListController::class, 'showAll'])->name('showAll');
 Route::get('/showOpenRoute', [TodoListController::class, 'showOpen'])->name('showOpen');
 Route::get('/showDoneRoute', [TodoListController::class, 'showDone'])->name('showDone');

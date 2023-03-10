@@ -15,6 +15,10 @@ class TodoListController extends Controller
         // return view('welcome', ['listEntries' => listEntry::where('is_complete', 1)->get()]);
     }
 
+    public function userView(){
+        return view('user');
+    }
+
     public function showAll(){
         return view('welcome', ['listEntries' => listEntry::all()]);
     }

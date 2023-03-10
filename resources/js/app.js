@@ -1,4 +1,7 @@
 import { createApp } from "vue";
-import Test from "./Test.vue";
+import App from "./App.vue";
+import user from "./components/Posts/user.vue";
 
-createApp(Test).mount("#app");
+const app = createApp(App);
+app.component("user", user);
+app.mount("#app");
