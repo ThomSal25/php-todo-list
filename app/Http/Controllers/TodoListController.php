@@ -70,4 +70,19 @@ class TodoListController extends Controller
         $ListEntry->delete();
         return redirect('/');
     }
+
+    // Vue
+    public function store(Request $request){
+        
+    }
+
+    public function indexTodo()
+    {
+        return listEntry::all();
+         
+    }
+
+    public function saveWithVue(Request $request){
+        dd($request->all());
+    }
 }

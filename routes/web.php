@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoListController;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +31,6 @@ Route::post('/deleteEntryRoute/{id}', [TodoListController::class, 'deleteEntry']
 Route::get('/dbconn', function(){
     return view('dbconn');
 });
+
+Route::get('todo/list', [TodoListController::class, 'indexTodo']);
+Route::post('/todo/saveWithVue', [TodoListController::class, 'saveWithVue']);
