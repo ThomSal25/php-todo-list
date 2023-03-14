@@ -34,3 +34,4 @@ Route::get('/dbconn', function(){
 
 Route::get('todo/list', [TodoListController::class, 'indexTodo']);
 Route::post('/todo/saveWithVue', [TodoListController::class, 'saveWithVue']);
+Route::patch('todo/updateTodo/', [TodoListController::class, 'updateWithVue']);

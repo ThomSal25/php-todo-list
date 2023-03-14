@@ -83,6 +83,12 @@ class TodoListController extends Controller
     }
 
     public function saveWithVue(Request $request){
-        dd($request->all());
+        // dd($request->all());
+        $newListEntry = $request->all();
+        $response = listEntry::create($newListEntry);
+        return response()->json([
+            'status' => 'success',
+            'data' => $response
+        ], 200);
     }
 }
