@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoListController;
+use App\Http\Controllers\LoginController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -36,3 +37,10 @@ Route::get('todo/list', [TodoListController::class, 'indexTodo']);
 Route::post('/todo/saveWithVue', [TodoListController::class, 'saveWithVue']);
 Route::put('todo/updateTodo/{id}', [TodoListController::class, 'updateWithVue']);
 Route::delete('todo/deleteTodo/{id}', [TodoListController::class, 'deleteWithVue']);
+
+// Route::get('/login', [LoginController::class, 'index']);
+Route::controller(LoginController::class)->group(function(){
+    Route::get('login', 'index')->name('login');
+    Route::get('registraion', 'registration')->name('registration');
+    Route::get('logout', 'logout')->name('logout');
+}); 

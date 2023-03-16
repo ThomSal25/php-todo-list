@@ -44,11 +44,13 @@
                     }}</span>
                     <ButtonComponent
                         :buttonName="Edit"
+                        class="edit-btn"
                         :id="todo.id"
                         @click="edit(todo.id)"
                     />
                     <ButtonComponent
                         :buttonName="Delete"
+                        class="delete-btn"
                         :id="todo.id"
                         @click="deleteTodo(todo.id)"
                     />
@@ -142,7 +144,7 @@ export default {
         },
 
         edit(id) {
-            this.editField = false;
+            this.editField = !this.editField;
             for (let item of this.todos) {
                 if (id === item.id) {
                     this.editTodo.id = item.id;
@@ -259,12 +261,21 @@ li {
     display: grid;
     grid-template-columns: 1fr 20fr 2fr 2fr;
     grid-gap: 0.5rem;
+    align-items: center;
 
     border: solid lightgray 0.25rem;
 }
 
 span {
     text-align: left;
+}
+
+.edit-btn {
+    background-color: darkgreen;
+}
+
+.delete-btn {
+    background-color: darkred;
 }
 
 .is-done {

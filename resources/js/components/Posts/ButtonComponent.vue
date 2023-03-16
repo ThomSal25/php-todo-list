@@ -14,4 +14,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+button {
+    border-radius: 0.5rem;
+    padding-block: 0.2rem;
+    padding-inline: 0.3rem;
+}
+</style>
