@@ -91,4 +91,31 @@ class TodoListController extends Controller
             'data' => $response
         ], 200);
     }
+
+    public function updateWithVue(Request $request, $id){
+        $updatedListEntry = listEntry::find($id);
+
+        $updatedListEntry->name = $request->input('name');
+        $updatedListEntry->is_complete = $request->input('is_complete');
+        $updatedListEntry->isDone = $request->input('isDone');
+
+        $updatedListEntry->update();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Todo is updated',
+        ], 200);
+        
+    }
+
+    public function deleteWithVue(Request $request, $id){
+        $deletedListEntry = listEntry::find($id);
+        $deletedListEntry->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Todo is deleted',
+        ], 200);
+    }
+    
 }

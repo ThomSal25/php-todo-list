@@ -5,4 +5,22 @@
 
 <script></script>
 
-<style></style>
+<style>
+* {
+    box-sizing: border-box; /* Boxgröße wird auf Border begrenzt, gilt für alle Boxes*/
+    line-height: 1.5;
+
+    margin: 0rem;
+}
+
+html {
+    background-color: #f3f4f6;
+    text-align: center;
+}
+
+body {
+    display: inline-block;
+    max-width: 100rem;
+    margin: 0 auto;
+}
+</style>
