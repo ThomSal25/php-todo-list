@@ -19,7 +19,53 @@ class LoginController extends Controller
     return view('registration');
    }
 
-   function logout(){
+   function validate_registration(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|min:6',
+        ]);
 
+        $data=$request->all();
+
+        User::create([
+            'name'=>$data['name'],
+            'email'=>$data['email'],
+            'password'=>Hash::make($data['password'])
+        ]);
+
+        return redirect('login')->with('success', 'Registration Completed, now you can login');
+   }
+
+   function validate_login(Request $request){
+    $request->validate([
+        'email'=>'required',
+        'password'=>'required'
+    ]);
+    $credentials = $request->only ('email', 'password');
+
+    if(Auth::attempt($credentials)){
+        return redirect('dashboard');
+    } 
+    
+    return redirect('login')->with('success', 'Login details are not valid');
+
+   }
+
+   function dashboard(){
+    if(Auth::check()){
+        return view('dashboard');
+    }
+
+    return redirect('login')->with('success', 'Please login');
+
+   }
+
+   function logout(){
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('login')->with('success', 'You are logged out now.');
    }
 }
