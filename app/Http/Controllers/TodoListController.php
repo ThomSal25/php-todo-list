@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\listEntry;
+use App\models\Image;
 
 class TodoListController extends Controller
 {
     //
     public function index(){
         // show all ListEntries
-        return view('welcome', ['listEntries' => listEntry::all()]);
+        // return view('welcome', ['listEntries' => listEntry::all()]);
+        return view('login');
         // show all, which are not complete
         // return view('welcome', ['listEntries' => listEntry::where('is_complete', 1)->get()]);
     }
@@ -72,11 +74,7 @@ class TodoListController extends Controller
     }
 
     // Vue
-    public function store(Request $request){
-        
-    }
-
-    public function indexTodo()
+   public function indexTodo()
     {
         return listEntry::all();
          
@@ -118,4 +116,30 @@ class TodoListController extends Controller
         ], 200);
     }
     
+    public function loadImg(){
+        return Image::all();
+        // return listEntry::all();
+        // return view('image', ['images' => Image::all()]);
+    }
+
+    // API
+    public function todoRestApi (){
+        $listEntries = ListEntry::all();
+
+        if($listEntries->count() > 0){
+            $data =[
+                'status' => 200,
+                'listEntries' => $listEntries
+            ];
+            return response()->json($data, 200);
+        } else {
+            $data =[
+                'status' => 404,
+                'listEntries' => 'No records found'
+            ];
+            return response()->json($data, 200);
+        }
+        
+       
+    }
 }

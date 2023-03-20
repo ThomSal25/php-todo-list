@@ -1,34 +1,5 @@
 <template>
     <article>
-        <p>What has to be done?</p>
-        <form
-            class="add-form"
-            action="./api/list_entries"
-            method="POST"
-            @submit.prevent="addNewTodo()"
-        >
-            <InputComponent v-model="newTodo.name" />
-            <ButtonComponent :buttonName="buttonName" :disabled="isDisabled" />
-            <!-- @submit.prevent="addNewTodo" -->
-        </form>
-
-        <div :class="[{ 'edit-field': editField }]">
-            <span>Is Done?</span
-            ><input
-                type="checkbox"
-                name=""
-                :id="editTodo.id"
-                @click="changeDone(editTodo.id)"
-                v-model="editTodo.done"
-            />
-            <InputComponent v-model="editTodo.name" />
-            <ButtonComponent
-                :buttonName="SaveChange"
-                @click="changeName(editTodo.id)"
-            />
-            <ButtonComponent :buttonName="Cancel" @click="cancel()" />
-        </div>
-
         <div class="list-container">
             <ul class="todo-list">
                 <li v-for="todo in todos" :key="todo.id">
@@ -42,23 +13,8 @@
                     <span :class="[{ 'is-done': todo.done }]">{{
                         todo.name
                     }}</span>
-                    <ButtonComponent
-                        :buttonName="Edit"
-                        class="edit-btn"
-                        :id="todo.id"
-                        @click="edit(todo.id)"
-                    />
-                    <ButtonComponent
-                        :buttonName="Delete"
-                        class="delete-btn"
-                        :id="todo.id"
-                        @click="deleteTodo(todo.id)"
-                    />
                 </li>
             </ul>
-        </div>
-        <div v-for="image in images" :key="image.id">
-            <img v-bind:src="'storage/' + image.image" />
         </div>
     </article>
 </template>
@@ -95,12 +51,10 @@ export default {
                 isDone: "",
             },
             updatedTodo: {},
-            images: [],
         };
     },
     async mounted() {
         this.getTodoList();
-        this.getImages();
     },
     computed: {
         isDisabled() {
@@ -124,27 +78,6 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-        },
-
-        getImages() {
-            axios
-                .get("todo/img")
-                .then((response) => {
-                    this.images = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-
-            // axios
-            //     .get("todo/img")
-            //     .then((response) => {
-            //         console.log("👍");
-            //         this.images = response.data;
-            //     })
-            //     .catch((error) => {
-            //         console.log(error);
-            //     });
         },
 
         axiosPut(id, updateItem) {

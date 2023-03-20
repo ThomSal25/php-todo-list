@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoListController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ImageController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -37,6 +38,7 @@ Route::get('todo/list', [TodoListController::class, 'indexTodo']);
 Route::post('/todo/saveWithVue', [TodoListController::class, 'saveWithVue']);
 Route::put('todo/updateTodo/{id}', [TodoListController::class, 'updateWithVue']);
 Route::delete('todo/deleteTodo/{id}', [TodoListController::class, 'deleteWithVue']);
+Route::get('todo/img', [TodoListController::class, 'loadImg']);
 
 // Route::get('/login', [LoginController::class, 'index']);
 Route::controller(LoginController::class)->group(function(){
@@ -48,3 +50,8 @@ Route::controller(LoginController::class)->group(function(){
     Route::post('validate_login', 'validate_login')->name('sample.validate_login');
     Route::get('dashboard', 'dashboard')->name('dashboard');
 }); 
+
+// Image
+Route::get('/image', [ImageController::class,'indexImage'])->name('image.index');
+Route::post('/image', [ImageController::class,'storeImage'])->name('image.store');
+Route::get('/image', [ImageController::class, 'showAllImages']);
