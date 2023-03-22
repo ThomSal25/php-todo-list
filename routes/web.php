@@ -54,4 +54,4 @@ Route::controller(LoginController::class)->group(function(){
 // Image
 Route::get('/image', [ImageController::class,'indexImage'])->name('image.index');
 Route::post('/image', [ImageController::class,'storeImage'])->name('image.store');
-Route::get('/image', [ImageController::class, 'showAllImages']);
+Route::get('/image', [ImageController::class, 'showAllImages'])->name('image.index');

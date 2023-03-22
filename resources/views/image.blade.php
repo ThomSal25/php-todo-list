@@ -22,13 +22,14 @@
                     <span class="text-red-600 text-sm">{{ $message }}</span>
                     @enderror
                 </label>
+                <input type="text" name="description">
                 <button type="submit" class="px-4 py-2 text-sm text-white bg-indigo-600 rounded">Submit</button>
             </form>
         </div>
 
         <ul style="margin-top: 20px;">
-            @foreach ($images as $image)
-            <!-- array as item -->
+            @foreach ($imageList as $image)
+             <!-- array as item -->
                 <li class="flex orientation" style="align-items: space-between;">
                     <img src="{{ asset('storage/'.$image->image) }}" alt="{{ $image->image }}">
                 </li>    

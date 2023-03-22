@@ -9,27 +9,32 @@ class ImageController extends Controller
 {
     public function indexImage()
     {
-        return view('image');
+        return view('/image');
     }
 
     public function storeImage(Request $request)
     {
+        
         $this->validate($request, [
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $image_path = $request->file('image')->store('image', 'public');
-
+        $filename = $request->description.time() . '.' . $request->file('image')->getClientOriginalExtension();
+        $image_path = $request->file('image')->storeAs('image/Test', $filename, 'public');
+        // $image_path = $request->file('image')->store( 'image/Test/', 'public');
+        
         $data = Image::create([
             'image' => $image_path,
         ]);
 
         session()->flash('success', 'Image Upload successfully');
-
+        \Log::info(json_encode($request->all()));
+        \Log::info(json_encode($data->image));
+        \Log::info(json_encode($image_path));
         return redirect()->route('image.index');
     }
 
     public function showAllImages(){
-        return view('image', ['images' => Image::all()]);
+        return view('/image', ['imageList' => Image::all()]);
     }
 }
